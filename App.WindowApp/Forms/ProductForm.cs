@@ -1,0 +1,88 @@
+﻿using App.Core.Models;
+using App.Core.Utilities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+
+namespace App.WindowApp.Forms
+{
+    public partial class ProductForm : Form
+    {
+        public ProductForm(ProductFormModeEnum mode, Product? p)
+        {
+            InitializeComponent();
+
+            numstock.Maximum = Int32.MaxValue;
+            numprice.Maximum = decimal.MaxValue;
+
+
+            cmbcategory.Items.Clear();
+            cmbcategory.DataSource = Enum.GetNames(typeof(ProductCategoryEnum));
+            cmbcategory.SelectedIndex = 0;
+
+            cmbstatus.Items.Clear();
+            cmbstatus.DataSource = Enum.GetNames(typeof(ProductCategoryStatus));
+            cmbstatus.SelectedIndex = 0;
+
+            if (mode == ProductFormModeEnum.Edit)
+            {
+                btnsave.Text = "update";
+            }
+            else if (mode == ProductFormModeEnum.View)
+            {
+
+                btnsave.Visible = false;
+            }
+
+            if (mode == ProductFormModeEnum.Edit || mode == ProductFormModeEnum.View)
+            {
+
+                txtid.Text = p.Id;
+                txtname.Text = p.Name;
+                cmbcategory.SelectedItem = p.Category.ToString();
+                cmbstatus.SelectedItem = p.Status.ToString();
+                numprice.Value = p.Price;
+                numstock.Value = p.Stock;
+
+            }
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tblform_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ProductForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtid_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btncancel_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
