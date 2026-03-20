@@ -228,6 +228,7 @@
             txtseaarch.Name = "txtseaarch";
             txtseaarch.Size = new Size(428, 31);
             txtseaarch.TabIndex = 3;
+            txtseaarch.TextChanged += txtseaarch_TextChanged;
             // 
             // cmbcategory
             // 

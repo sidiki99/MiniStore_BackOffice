@@ -88,7 +88,7 @@
             flpfooter.Name = "flpfooter";
             flpfooter.RightToLeft = RightToLeft.Yes;
             flpfooter.Size = new Size(788, 58);
-            flpfooter.TabIndex = 2;
+            flpfooter.TabIndex = 0;
             flpfooter.Paint += flowLayoutPanel1_Paint;
             // 
             // btnsave
@@ -97,9 +97,10 @@
             btnsave.Location = new Point(673, 3);
             btnsave.Name = "btnsave";
             btnsave.Size = new Size(112, 34);
-            btnsave.TabIndex = 0;
+            btnsave.TabIndex = 1;
             btnsave.Text = "save";
             btnsave.UseVisualStyleBackColor = true;
+            btnsave.Click += btnsave_Click;
             // 
             // btncancel
             // 
@@ -107,9 +108,10 @@
             btncancel.Location = new Point(555, 3);
             btncancel.Name = "btncancel";
             btncancel.Size = new Size(112, 34);
-            btncancel.TabIndex = 1;
+            btncancel.TabIndex = 0;
             btncancel.Text = "cancel";
             btncancel.UseVisualStyleBackColor = true;
+            btncancel.Click += btncancel_Click_1;
             // 
             // pnlform
             // 
@@ -150,7 +152,7 @@
             tblform.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
             tblform.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
             tblform.Size = new Size(800, 310);
-            tblform.TabIndex = 2;
+            tblform.TabIndex = 1;
             tblform.Paint += tblform_Paint;
             // 
             // lblname
@@ -172,7 +174,7 @@
             lblcategory.Name = "lblcategory";
             lblcategory.Padding = new Padding(10);
             lblcategory.Size = new Size(125, 45);
-            lblcategory.TabIndex = 1;
+            lblcategory.TabIndex = 7;
             lblcategory.Text = "Category";
             // 
             // lblprice
@@ -183,7 +185,7 @@
             lblprice.Name = "lblprice";
             lblprice.Padding = new Padding(10);
             lblprice.Size = new Size(125, 45);
-            lblprice.TabIndex = 2;
+            lblprice.TabIndex = 8;
             lblprice.Text = "Price";
             // 
             // lblstock
@@ -194,7 +196,7 @@
             lblstock.Name = "lblstock";
             lblstock.Padding = new Padding(10);
             lblstock.Size = new Size(125, 45);
-            lblstock.TabIndex = 3;
+            lblstock.TabIndex = 9;
             lblstock.Text = "Stock";
             // 
             // lblstatus
@@ -205,7 +207,7 @@
             lblstatus.Name = "lblstatus";
             lblstatus.Padding = new Padding(10);
             lblstatus.Size = new Size(125, 45);
-            lblstatus.TabIndex = 4;
+            lblstatus.TabIndex = 10;
             lblstatus.Text = "Status";
             // 
             // lblid
@@ -216,7 +218,7 @@
             lblid.Name = "lblid";
             lblid.Padding = new Padding(10);
             lblid.Size = new Size(125, 45);
-            lblid.TabIndex = 5;
+            lblid.TabIndex = 11;
             lblid.Text = "ID";
             // 
             // txtname
@@ -225,7 +227,7 @@
             txtname.Location = new Point(134, 3);
             txtname.Name = "txtname";
             txtname.Size = new Size(663, 31);
-            txtname.TabIndex = 6;
+            txtname.TabIndex = 0;
             // 
             // cmbcategory
             // 
@@ -234,7 +236,7 @@
             cmbcategory.Location = new Point(134, 54);
             cmbcategory.Name = "cmbcategory";
             cmbcategory.Size = new Size(663, 33);
-            cmbcategory.TabIndex = 7;
+            cmbcategory.TabIndex = 1;
             // 
             // numprice
             // 
@@ -242,7 +244,7 @@
             numprice.Location = new Point(134, 105);
             numprice.Name = "numprice";
             numprice.Size = new Size(663, 31);
-            numprice.TabIndex = 8;
+            numprice.TabIndex = 5;
             // 
             // numstock
             // 
@@ -250,7 +252,7 @@
             numstock.Location = new Point(134, 156);
             numstock.Name = "numstock";
             numstock.Size = new Size(663, 31);
-            numstock.TabIndex = 9;
+            numstock.TabIndex = 3;
             // 
             // cmbstatus
             // 
@@ -259,7 +261,7 @@
             cmbstatus.Location = new Point(134, 207);
             cmbstatus.Name = "cmbstatus";
             cmbstatus.Size = new Size(663, 33);
-            cmbstatus.TabIndex = 10;
+            cmbstatus.TabIndex = 4;
             // 
             // txtid
             // 
@@ -268,7 +270,7 @@
             txtid.Name = "txtid";
             txtid.ReadOnly = true;
             txtid.Size = new Size(663, 31);
-            txtid.TabIndex = 11;
+            txtid.TabIndex = 5;
             txtid.TextChanged += txtid_TextChanged;
             // 
             // label1
@@ -287,7 +289,6 @@
             Controls.Add(pnlCountaner);
             Name = "ProductForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "ProductForm";
             Load += ProductForm_Load;
             pnlCountaner.ResumeLayout(false);
             pnltoolstrip.ResumeLayout(false);

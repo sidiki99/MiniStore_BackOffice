@@ -1,4 +1,5 @@
-﻿using App.Core.Models;
+﻿using App.Core.Contracts;
+using App.Core.Models;
 using App.Core.Utilities;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,10 @@ namespace App.WindowApp.Forms
 {
     public partial class ProductForm : Form
     {
-        public ProductForm(ProductFormModeEnum mode, Product? p)
+        ProductFormModeEnum _mode;
+        Product _product;
+        IProductService _service;
+        public ProductForm(ProductFormModeEnum mode, Product? p, IProductService service)
         {
             InitializeComponent();
 
@@ -31,6 +35,9 @@ namespace App.WindowApp.Forms
             cmbstatus.DataSource = Enum.GetNames(typeof(ProductCategoryStatus));
             cmbstatus.SelectedIndex = 0;
 
+            _mode = mode;
+            _product = p;
+            _service = service;
             if (mode == ProductFormModeEnum.Edit)
             {
                 btnsave.Text = "update";
@@ -83,6 +90,61 @@ namespace App.WindowApp.Forms
         private void btncancel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnsave_Click(object sender, EventArgs e)
+        {
+            if (_mode == ProductFormModeEnum.Add)
+            {
+                Product newProduct = new Product();
+                newProduct.Name = txtname.Text;
+                newProduct.Category = (ProductCategoryEnum)Enum.Parse(
+               typeof(ProductCategoryEnum),
+               cmbcategory.SelectedItem.ToString()
+                );
+                newProduct.Status = (ProductCategoryStatus)Enum.Parse(
+                typeof(ProductCategoryStatus),
+                cmbstatus.SelectedItem.ToString()
+                 );
+                newProduct.Price = numprice.Value;
+                newProduct.Stock = (int)numstock.Value;
+
+
+                //                _product =_service.Add(newProduct);
+                //                txtid.Text = _product.Id;
+
+
+                Product temp = _service.Add(newProduct);
+                txtid.Text = temp?.Id.ToString() ?? "";
+
+
+
+            }
+            else if (_mode == ProductFormModeEnum.Edit)
+            {
+
+                _product.Name = txtname.Text;
+                _product.Category = (ProductCategoryEnum)Enum.Parse(
+               typeof(ProductCategoryEnum),
+               cmbcategory.SelectedItem.ToString()
+                );
+                _product.Status = (ProductCategoryStatus)Enum.Parse(
+                typeof(ProductCategoryStatus),
+                cmbstatus.SelectedItem.ToString()
+            );
+                _product.Price = numprice.Value;
+                _product.Stock = (int)numstock.Value;
+
+                bool isUpdated = _service.Update(_product);
+
+            }
+            this.Close();
+
+        }
+
+        private void btncancel_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

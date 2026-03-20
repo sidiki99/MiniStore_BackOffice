@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace App.Core.Services
 {
-    public class InMemoryProductService : IProductService
+    public class InMemoryProductService : IProductService 
     {
         private List<Product> products;
         public InMemoryProductService()
@@ -20,30 +20,63 @@ namespace App.Core.Services
             products = new List<Product>();
             GenerateFakeProducts();
         }
-        public void Add(Product product)
+        public Product Add(Product product)
         {
-            throw new NotImplementedException();
+            if(product != null)
+            {
+                product.Id = GenerateId();
+                products.Add(product);
+
+            }
+            return product;
+
         }
-        public bool Update(Product pro)
+        public bool Update(Product product) { 
+            if( product != null)
         {
-            return false;
+                Product? existing = products.Find(p => p.Id == product.Id);
+                if (existing == null) return false;
+                existing.Name = product.Name;
+                existing.Category = product.Category;
+                existing.Price = product.Price;
+                existing.Status = product.Status;
+                existing.Stock = product.Stock;
+                
+           
+        }
+            return true;
         }
         public bool Delete(string id)
         {
-            return false;
+            Product prodToBeDeleted = GetById(id);
+            products.Remove(prodToBeDeleted);
+            return true;
         }
-        public Product GetById(string id)
-        { throw new NotImplementedException(); }
+        public Product? GetById(string id)
+        {
+            Product? prod = products.Find(p => p.Id == id);
+            return prod;
+        }
         public List<Product> GetAll()
         {
             return products.OrderBy(p => p.Name).ToList();
         }
-      
-        public List<Product> Search(string text, ProductCategoryEnum? category, ProductCategoryStatus status)
-        {
-            throw new NotImplementedException();
-        }
 
+        public List<Product> Search(string text, ProductCategoryEnum? category, ProductCategoryStatus? status)
+        {
+            List<Product> _filtered = products.ToList();
+
+            if (!string.IsNullOrEmpty(text))
+                _filtered = _filtered.Where(p => p.Name.Contains(text)).ToList();
+
+            if (category != null)
+                _filtered = _filtered.Where(p => p.Category == category).ToList();
+
+            if (status != null)
+                _filtered = _filtered.Where(p => p.Status == status).ToList();
+
+            return _filtered;
+        }
         public void GenerateFakeProducts()
         {
             products.Clear();
